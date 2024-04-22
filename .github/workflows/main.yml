@@ -20,7 +20,7 @@ jobs:
     # changes the base-tag in index.html from '/' to 'MyCoffeeNote' to match GitHub Pages repository subdirectory
     - name: Change base-tag in index.html from / to MyCoffeeNote
       run: sed -i 's/<base href="\/" \/>/<base href="\/MyCoffeeNote\/" \/>/g' MyCoffeeNote/MyCoffeeNote/bin/Release/net6.0/publish/wwwroot/index.html
-	        
+      
     # add .nojekyll file to tell GitHub pages to not treat this as a Jekyll project. (Allow files and folders starting with an underscore)
     - name: Add .nojekyll file
       run: touch MyCoffeeNote/MyCoffeeNote/bin/Release/net6.0/publish/wwwroot/.nojekyll
