@@ -3,7 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34723.18
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyCoffeeNote", "MyCoffeeNote\MyCoffeeNote.csproj", "{BC768F85-D88C-413B-835B-54BA0293B227}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCoffeeNote", "MyCoffeeNote\MyCoffeeNote.csproj", "{BC768F85-D88C-413B-835B-54BA0293B227}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1.Pres", "1.Pres", "{A8C0307B-0D5E-41A2-B173-4C12D04BCE8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2.Infra", "2.Infra", "{B5F40C16-8476-4DB3-98E1-7C22E3E4BC36}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.App", "3.App", "{BC9FE321-5807-4756-8121-AE941EF07641}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.Dom", "4.Dom", "{F341B023-B30F-436E-8AD2-83CE010E5D73}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCoffeeNote.Domain", "MyCoffeeNote.Domain\MyCoffeeNote.Domain.csproj", "{77973E8E-805D-45DD-BCFD-D53A0BBA0089}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyCoffeeNote.Application", "MyCoffeeNote.Application\MyCoffeeNote.Application.csproj", "{9A9B288E-4358-4693-B1E6-23574B5133A6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +27,22 @@ Global
 		{BC768F85-D88C-413B-835B-54BA0293B227}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC768F85-D88C-413B-835B-54BA0293B227}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC768F85-D88C-413B-835B-54BA0293B227}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77973E8E-805D-45DD-BCFD-D53A0BBA0089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77973E8E-805D-45DD-BCFD-D53A0BBA0089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77973E8E-805D-45DD-BCFD-D53A0BBA0089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77973E8E-805D-45DD-BCFD-D53A0BBA0089}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A9B288E-4358-4693-B1E6-23574B5133A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A9B288E-4358-4693-B1E6-23574B5133A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A9B288E-4358-4693-B1E6-23574B5133A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A9B288E-4358-4693-B1E6-23574B5133A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC768F85-D88C-413B-835B-54BA0293B227} = {A8C0307B-0D5E-41A2-B173-4C12D04BCE8A}
+		{77973E8E-805D-45DD-BCFD-D53A0BBA0089} = {F341B023-B30F-436E-8AD2-83CE010E5D73}
+		{9A9B288E-4358-4693-B1E6-23574B5133A6} = {BC9FE321-5807-4756-8121-AE941EF07641}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B38BD205-49FA-44B9-B3CE-A6CC068938EB}

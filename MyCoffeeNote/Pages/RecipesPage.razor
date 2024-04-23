@@ -1,0 +1,37 @@
+﻿@using MyCoffeeNote.Domain.Entities
+@using MudBlazor;
+
+@page "/"
+
+<PageTitle>Ваши рецепты</PageTitle>
+
+<MudDataGrid Items="@AllRecipes" T="Recipe" @ref="MudDataGrip"
+             Dense="true" Striped="true" Bordered="true" ReadOnly="false"
+             DragDropColumnReordering="true"
+             EditMode="DataGridEditMode.Cell"
+             EditTrigger="DataGridEditTrigger.OnRowClick"
+             CommittedItemChanges="@CommittedItemChanges"
+             SortMode="SortMode.Single">
+    <Columns>
+        <PropertyColumn Property="x => x.Description"></PropertyColumn>
+        <PropertyColumn Property="x => x.CreationDate.ToLongTimeString()" IsEditable="false"></PropertyColumn> 
+        <TemplateColumn IsEditable="false">
+            <CellTemplate>
+                <MudButton OnClick="@(() => DeleteLine(context))" Variant="Variant.Outlined"
+                           EndIcon="@Icons.Material.Filled.RemoveCircleOutline">
+                    Удалить запись
+                </MudButton>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
+    <ToolBarContent>
+        <MudSpacer />
+        <MudItem Style="margin-right: 1%;">
+            <MudButton OnClick="@AddNewLine" Variant="Variant.Outlined"
+                       EndIcon="@Icons.Material.Outlined.AddCircleOutline">
+                Добавить новый рецепт
+            </MudButton>
+        </MudItem>
+    </ToolBarContent>
+    
+</MudDataGrid>
