@@ -25,5 +25,12 @@ namespace MyCoffeeNote.Domain.Contracts
         /// </summary>
         /// <param name="recipe"></param>
         public void RemoveRecipe(Recipe recipe);
+        /// <summary>
+        /// Получение уникальных столбцов
+        /// </summary>
+        public ObservableCollection<string> GetUniqColumns();
+
+        public delegate void ColumnsUpdate(ObservableCollection<string> newColumnList);
+        public event ColumnsUpdate Notify;
     }
 }

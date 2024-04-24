@@ -1,7 +1,13 @@
-﻿@using MyCoffeeNote.Domain.Entities
-@using MudBlazor;
+﻿@page "/"
+@using MyCoffeeNote.Domain.Entities
 
-@page "/"
+@code {
+    private string GetStringPropertyLambdaExpression(Recipe pInfo, string name)
+    {
+        return pInfo.Columns.ContainsKey(name) ? pInfo.Columns[name] : "";
+    }
+
+}
 
 <PageTitle>Ваши рецепты</PageTitle>
 
@@ -15,6 +21,18 @@
     <Columns>
         <PropertyColumn Property="x => x.Description"></PropertyColumn>
         <PropertyColumn Property="x => x.CreationDate.ToLongTimeString()" IsEditable="false"></PropertyColumn> 
+        @foreach (string column in AllUniqColumns)
+        {
+            <PropertyColumn T="Recipe" TProperty="string" Title="@column" Property="@((q) => GetStringPropertyLambdaExpression(q, column))"></PropertyColumn>
+
+
+          @*   <TemplateColumn Title="@column">
+                <CellTemplate>
+                    <MudTextField T="Recipe" Variant="Variant.Text" Value="" bind-Value="@Method"></MudTextField>
+                </CellTemplate>
+            </TemplateColumn> *@
+        }
+
         <TemplateColumn IsEditable="false">
             <CellTemplate>
                 <MudButton OnClick="@(() => DeleteLine(context))" Variant="Variant.Outlined"

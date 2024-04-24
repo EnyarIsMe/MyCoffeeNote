@@ -18,6 +18,10 @@ namespace MyCoffeeNote.Pages
         /// </summary>
         private ObservableCollection<Recipe> AllRecipes { get; set; } = new();
         /// <summary>
+        /// Все уникальные столбцы
+        /// </summary>
+        private ObservableCollection<string> AllUniqColumns { get; set; } = new();
+        /// <summary>
         /// Менеджер информации
         /// </summary>
         [Inject]
@@ -27,24 +31,37 @@ namespace MyCoffeeNote.Pages
         /// </summary>
         private MudDataGrid<Recipe> MudDataGrip { get; set; }
 
+        public Recipe ColumnBind
+        {
+            get => throw new NotImplementedException();
+            set => throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Получить все рецепты
         /// </summary>
         /// <returns></returns>
         private void GetAllRecipes() => AllRecipes = DataManager.GetAllRecipes();
-
+        /// <summary>
+        /// Получить все уникальные столбцы
+        /// </summary>
+        private void GetAllUniqColumns()
+        {
+            AllUniqColumns = DataManager.GetUniqColumns();
+            DataManager.Notify += collection => AllUniqColumns = collection;
+        }
         protected override void OnInitialized()
         {
             base.OnInitialized();
             GetAllRecipes();
+            GetAllUniqColumns();
         }
-
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                MudDataGrip.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Ascending,
+                MudDataGrip.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Descending,
                     recipe => recipe.CreationDate).GetAwaiter().GetResult();
             }
         }
@@ -56,7 +73,6 @@ namespace MyCoffeeNote.Pages
         {
             if (!DataManager.SetRecipe(obj))
             {
-                
             }
         }
         /// <summary>

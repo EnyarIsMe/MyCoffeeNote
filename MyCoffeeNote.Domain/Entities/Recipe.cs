@@ -12,10 +12,14 @@
         /// <summary>
         /// Описание
         /// </summary>
-        public string Description { get; set; }
+        public string? Description { get; set; }
         /// <summary>
         /// Дата создания
         /// </summary>
         public DateTime CreationDate { get; set; }
+        /// <summary>
+        /// Список столбцов с названиями
+        /// </summary>
+        public Dictionary<string, string>? Columns { get; set; }
     }
 }
