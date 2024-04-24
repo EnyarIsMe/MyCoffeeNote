@@ -1,7 +1,7 @@
 {
   "entryAssembly": "MyCoffeeNote",
   "resources": {
-    "hash": "sha256-I086JR5hc+F6YjH7ya/aVLJ1dAJndV/5ZJxQdp16V24=",
+    "hash": "sha256-FcCVE5sFZGiVOAh4AJA3LFaCeSfVXRpMhlczZqIRy04=",
     "runtime": {
       "dotnet.6.0.29.2xjs4qx1tr.js": "sha256-BV1wi9qAMCmpfZ+aXPplngN3cFgig0bFqWhNad3R5Lo=",
       "dotnet.timezones.blat": "sha256-csJ9EjcYXaAQrYK1S5WLY51YBLmp7zcST7wH0IDbvgg=",
@@ -30,9 +30,9 @@
       "Microsoft.JSInterop.dll": "sha256-/umXhuvZfKOSyMJhgn83BAJcud1CKIXv0IBUsDgfx18=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-9cvWXucyYKpzZTdbC0MoUbJCbn4Qf6rJFO56YaDJM1U=",
       "MudBlazor.dll": "sha256-Cvun9/7C8fPyJaJ7QwKoTP0sh5KtsmOstk0lV86LqQI=",
-      "MyCoffeeNote.Application.dll": "sha256-oD8XrtkwXmTfnbUO+VFsPKWQjncDYzeTAJNCx7KT7nc=",
-      "MyCoffeeNote.dll": "sha256-GulFcLkpxSt9631T6eGNdhGdEvVQLO2DD/x0hzomjmQ=",
-      "MyCoffeeNote.Domain.dll": "sha256-VNFie8tgw4TAUUfbtetHDCxtml0o1PcEqnWw7ot8PfY=",
+      "MyCoffeeNote.Application.dll": "sha256-m+ToJG99ICXJCPUlX9SF1d0VZJKP8AinaXHbNUkFvV0=",
+      "MyCoffeeNote.dll": "sha256-TsCEWw57r+7Ix/DbuSqzHbjI1UvfZD+U/j2i94K5IGc=",
+      "MyCoffeeNote.Domain.dll": "sha256-cwo0Oi7qB0FOxFF+C6BziNpfLDW8EsbLiKB+zZeS0EU=",
       "System.Collections.Concurrent.dll": "sha256-aV6N4JtiDFdIt+TA2r01FVEwSuvCaNjSSZUgbn975NM=",
       "System.Collections.dll": "sha256-/qHzFfv6g7fB7pDsYQ0miNT3zGK1QOJcKsLPda32gKg=",
       "System.ComponentModel.Annotations.dll": "sha256-GLlo2trxfWH2a0yjPVH+LdNFwnvJKgpIC3iZOQfotYc=",
