@@ -5,6 +5,7 @@ using MyCoffeeNote.Domain.Entities;
 
 using System.Collections.ObjectModel;
 using MyCoffeeNote.Domain.Contracts;
+using System.Xml.Linq;
 
 namespace MyCoffeeNote.Pages
 {
@@ -18,6 +19,10 @@ namespace MyCoffeeNote.Pages
         /// </summary>
         private ObservableCollection<Recipe> AllRecipes { get; set; } = new();
         /// <summary>
+        /// Все уникальные столбцы
+        /// </summary>
+        private ObservableCollection<string> AllUniqColumns { get; set; } = new();
+        /// <summary>
         /// Менеджер информации
         /// </summary>
         [Inject]
@@ -25,26 +30,34 @@ namespace MyCoffeeNote.Pages
         /// <summary>
         /// Таблица с рецептами
         /// </summary>
-        private MudDataGrid<Recipe> MudDataGrip { get; set; }
+        private MudDataGrid<Recipe> MudDataGrid { get; set; }
+
 
         /// <summary>
         /// Получить все рецепты
         /// </summary>
         /// <returns></returns>
         private void GetAllRecipes() => AllRecipes = DataManager.GetAllRecipes();
-
+        /// <summary>
+        /// Получить все уникальные столбцы
+        /// </summary>
+        private void GetAllUniqColumns()
+        {
+            AllUniqColumns = DataManager.GetUniqColumns();
+            DataManager.Notify += collection => AllUniqColumns = collection;
+        }
         protected override void OnInitialized()
         {
             base.OnInitialized();
             GetAllRecipes();
+            GetAllUniqColumns();
         }
-
         protected override void OnAfterRender(bool firstRender)
         {
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                MudDataGrip.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Ascending,
+                MudDataGrid.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Descending,
                     recipe => recipe.CreationDate).GetAwaiter().GetResult();
             }
         }
@@ -56,7 +69,7 @@ namespace MyCoffeeNote.Pages
         {
             if (!DataManager.SetRecipe(obj))
             {
-                
+                //todo ошибка сохранения в локальное
             }
         }
         /// <summary>
@@ -75,6 +88,21 @@ namespace MyCoffeeNote.Pages
             {
                 DataManager.RemoveRecipe(obj.Item);
             }
+        }
+        /// <summary>
+        /// Получить значение для ячейки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        private static string GetCellValue(Recipe x, string column)
+        {
+            return x.Columns.ContainsKey(column) ? x.Columns[column] : String.Empty;
+        }
+
+        private void CellValueChanged(string newValue, string columnName, Recipe context)
+        {
+            DataManager.UpdateCellValue(newValue, columnName, context);
         }
     }
 }
