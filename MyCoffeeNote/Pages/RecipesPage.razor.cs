@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
 using MudBlazor;
 using MyCoffeeNote.Domain.Entities;
 
 using System.Collections.ObjectModel;
 using MyCoffeeNote.Domain.Contracts;
-using System.Xml.Linq;
 
 namespace MyCoffeeNote.Pages
 {
@@ -59,17 +57,6 @@ namespace MyCoffeeNote.Pages
             {
                 MudDataGrid.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Descending,
                     recipe => recipe.CreationDate).GetAwaiter().GetResult();
-            }
-        }
-        /// <summary>
-        /// Действие при внесении изменений в ячейку
-        /// </summary>
-        /// <param name="obj"></param>
-        private void CommittedItemChanges(Recipe obj)
-        {
-            if (!DataManager.SetRecipe(obj))
-            {
-                //todo ошибка сохранения в локальное
             }
         }
         /// <summary>

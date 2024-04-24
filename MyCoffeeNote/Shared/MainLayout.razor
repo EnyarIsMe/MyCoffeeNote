@@ -1,14 +1,20 @@
-﻿@inherits LayoutComponentBase
+﻿@using Blazored.LocalStorage
+@inherits LayoutComponentBase
+@inject ISyncLocalStorageService LocalStorage;
 
-<NavMenu />
-<MudThemeProvider/>
+@code {
+    private bool IsDarkMode
+    {
+        get => LocalStorage.GetItem<bool>("isDarkMode");
+        set => LocalStorage.SetItem("isDarkMode", value);
+    }
+}
+
+<MudThemeProvider IsDarkMode="IsDarkMode"></MudThemeProvider>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
-<div class="page">
-    <main>
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+<MudLayout>
+    @Body
+    <MudSwitch @bind-Value="@IsDarkMode" Color="Color.Primary" Class="ma-4" Style="align-self:flex-end;" T="bool" Label="Toggle Light/Dark Mode" />
+</MudLayout>
