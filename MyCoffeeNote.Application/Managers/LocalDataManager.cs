@@ -128,6 +128,7 @@ namespace MyCoffeeNote.Application.Managers
             }
             else
             {
+                recipeToEdit.Columns ??= new();
                 if (recipeToEdit.Columns!.ContainsKey(columnName))
                 {
                     recipeToEdit.Columns[columnName] = newValue;

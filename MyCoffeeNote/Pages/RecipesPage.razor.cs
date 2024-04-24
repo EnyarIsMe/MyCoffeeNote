@@ -97,6 +97,10 @@ namespace MyCoffeeNote.Pages
         /// <returns></returns>
         private static string GetCellValue(Recipe x, string column)
         {
+            if (x.Columns is null)
+            {
+                return String.Empty;
+            }
             return x.Columns.ContainsKey(column) ? x.Columns[column] : String.Empty;
         }
 
