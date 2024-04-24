@@ -35,9 +35,6 @@ namespace MyCoffeeNote.Domain.Contracts
         /// <summary>
         /// Обновление значения в ячейке
         /// </summary>
-        /// <param name="newValue"></param>
-        /// <param name="columnName"></param>
-        /// <param name="context"></param>
         void UpdateCellValue(string newValue, string columnName, Recipe context);
     }
 }
