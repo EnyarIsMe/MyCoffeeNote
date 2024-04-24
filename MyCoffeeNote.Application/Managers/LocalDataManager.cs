@@ -25,12 +25,8 @@ namespace MyCoffeeNote.Application.Managers
         /// Кеш данных столбцов
         /// </summary>
         private ObservableCollection<string>? ColumnsCache { get; set; }
-        ///// <summary>
-        ///// Кеш данных уникальных столбцов
-        ///// </summary>
-        //private ObservableCollection<string>? UniqColumnsCache { get; set; }
         public event IDataManager.ColumnsUpdate Notify;
-
+        
         /// <summary>
         /// Сервис работы с локальных хранилищем пользователя
         /// </summary>
@@ -114,6 +110,36 @@ namespace MyCoffeeNote.Application.Managers
                     throw new ArgumentOutOfRangeException();
             }
         }
+        /// <summary>
+        /// Обновление ячейки
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <param name="columnName"></param>
+        /// <param name="context"></param>
+        public void UpdateCellValue(string newValue, string columnName, Recipe context)
+        {
+            ObservableCollection<Recipe> collection = GetAllRecipes();
+            Recipe recipeToEdit = collection.Single(recipe => recipe.Id == context.Id);
+
+            if (string.IsNullOrWhiteSpace(newValue))
+            {
+                recipeToEdit.Columns!.Remove(columnName);
+                ColumnsCache.Remove(columnName);
+            }
+            else
+            {
+                if (recipeToEdit.Columns!.ContainsKey(columnName))
+                {
+                    recipeToEdit.Columns[columnName] = newValue;
+                }
+                else
+                {
+                    recipeToEdit.Columns.Add(columnName, newValue);
+                    ColumnsCache.Add(columnName);
+                }
+            }
+            SetAllRecipes(collection);
+        }
 
         #endregion Действия с столбцами
 
@@ -181,19 +207,7 @@ namespace MyCoffeeNote.Application.Managers
         /// Создание нового рецепта
         /// </summary>
         /// <returns>успешность запоминания</returns>
-        public void AddEmptyRecipe()
-        {
-            //todo почистить тут все
-            Dictionary<string, string> columns = new Dictionary<string, string>();
-            //for (int i = 0; i < Random.Shared.Next(1,2); i++)
-            //{
-                
-            //}
-            columns.Add(Random.Shared.NextDouble() % 2 > 0 ? "1"  : "2" , "карандаш");
-            columns.Add(Random.Shared.NextDouble() % 2 > 0 ? "3"  : "4", "нос");
-
-            SetRecipe(new() { Id = Guid.NewGuid(), CreationDate = DateTime.Now, Columns = columns});
-        }
+        public void AddEmptyRecipe() => SetRecipe(new() { Id = Guid.NewGuid(), CreationDate = DateTime.Now });
 
         /// <summary>
         /// Удаление рецепта

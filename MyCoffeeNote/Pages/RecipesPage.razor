@@ -1,47 +1,15 @@
 ﻿@page "/"
 @using MyCoffeeNote.Domain.Entities
 
-@code {
-    private string GetStringPropertyLambdaExpression(Recipe pInfo, string name)
-    {
-        return pInfo.Columns.ContainsKey(name) ? pInfo.Columns[name] : "";
-    }
-
-}
 
 <PageTitle>Ваши рецепты</PageTitle>
 
-<MudDataGrid Items="@AllRecipes" T="Recipe" @ref="MudDataGrip"
+<MudDataGrid Items="@AllRecipes" T="Recipe" @ref="MudDataGrid"
              Dense="true" Striped="true" Bordered="true" ReadOnly="false"
-             DragDropColumnReordering="true"
              EditMode="DataGridEditMode.Cell"
              EditTrigger="DataGridEditTrigger.OnRowClick"
              CommittedItemChanges="@CommittedItemChanges"
              SortMode="SortMode.Single">
-    <Columns>
-        <PropertyColumn Property="x => x.Description"></PropertyColumn>
-        <PropertyColumn Property="x => x.CreationDate.ToLongTimeString()" IsEditable="false"></PropertyColumn> 
-        @foreach (string column in AllUniqColumns)
-        {
-            <PropertyColumn T="Recipe" TProperty="string" Title="@column" Property="@((q) => GetStringPropertyLambdaExpression(q, column))"></PropertyColumn>
-
-
-          @*   <TemplateColumn Title="@column">
-                <CellTemplate>
-                    <MudTextField T="Recipe" Variant="Variant.Text" Value="" bind-Value="@Method"></MudTextField>
-                </CellTemplate>
-            </TemplateColumn> *@
-        }
-
-        <TemplateColumn IsEditable="false">
-            <CellTemplate>
-                <MudButton OnClick="@(() => DeleteLine(context))" Variant="Variant.Outlined"
-                           EndIcon="@Icons.Material.Filled.RemoveCircleOutline">
-                    Удалить запись
-                </MudButton>
-            </CellTemplate>
-        </TemplateColumn>
-    </Columns>
     <ToolBarContent>
         <MudSpacer />
         <MudItem Style="margin-right: 1%;">
@@ -51,5 +19,35 @@
             </MudButton>
         </MudItem>
     </ToolBarContent>
+    <Columns>
+        <PropertyColumn Property="x => x.Description"></PropertyColumn>
+        @foreach (string column in AllUniqColumns.OrderBy(s => s))
+        {
+            <TemplateColumn Title="@column" T="Recipe" IsEditable="false">
+                <CellTemplate>
+                    <MudStack Row>
+                        <MudTextField T="string" Variant="Variant.Text" 
+                                      Value="@(GetCellValue(context.Item, column))"
+                                      ValueChanged="@(newValue => CellValueChanged(newValue, column, context.Item))"></MudTextField>
+                    </MudStack>
+                </CellTemplate>
+            </TemplateColumn> 
+        }
+        <TemplateColumn Title="Введите имя нового столбца" IsEditable="false" >
+            <CellTemplate>
+                <MudStack Row>
+                    <MudTextField T="string" Variant="Variant.Text"
+                                  ValueChanged="@(newValue => CellValueChanged(newValue, newValue, context.Item))"></MudTextField>
+                </MudStack>
+            </CellTemplate>
+        </TemplateColumn>
+        <PropertyColumn Property="x => x.CreationDate.ToLongTimeString()" IsEditable="false" ></PropertyColumn>
+        <TemplateColumn IsEditable="false" >
+            <CellTemplate>
+                <MudButton OnClick="@(() => DeleteLine(context))" Variant="Variant.Outlined"
+                           EndIcon="@Icons.Material.Filled.RemoveCircleOutline">Удалить</MudButton>
+            </CellTemplate>
+        </TemplateColumn>
+    </Columns>
     
 </MudDataGrid>

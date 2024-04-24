@@ -5,6 +5,7 @@ using MyCoffeeNote.Domain.Entities;
 
 using System.Collections.ObjectModel;
 using MyCoffeeNote.Domain.Contracts;
+using System.Xml.Linq;
 
 namespace MyCoffeeNote.Pages
 {
@@ -29,13 +30,8 @@ namespace MyCoffeeNote.Pages
         /// <summary>
         /// Таблица с рецептами
         /// </summary>
-        private MudDataGrid<Recipe> MudDataGrip { get; set; }
+        private MudDataGrid<Recipe> MudDataGrid { get; set; }
 
-        public Recipe ColumnBind
-        {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Получить все рецепты
@@ -61,7 +57,7 @@ namespace MyCoffeeNote.Pages
             base.OnAfterRender(firstRender);
             if (firstRender)
             {
-                MudDataGrip.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Descending,
+                MudDataGrid.SetSortAsync(nameof(Recipe.CreationDate), SortDirection.Descending,
                     recipe => recipe.CreationDate).GetAwaiter().GetResult();
             }
         }
@@ -73,6 +69,7 @@ namespace MyCoffeeNote.Pages
         {
             if (!DataManager.SetRecipe(obj))
             {
+                //todo ошибка сохранения в локальное
             }
         }
         /// <summary>
@@ -91,6 +88,21 @@ namespace MyCoffeeNote.Pages
             {
                 DataManager.RemoveRecipe(obj.Item);
             }
+        }
+        /// <summary>
+        /// Получить значение для ячейки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="column"></param>
+        /// <returns></returns>
+        private static string GetCellValue(Recipe x, string column)
+        {
+            return x.Columns.ContainsKey(column) ? x.Columns[column] : String.Empty;
+        }
+
+        private void CellValueChanged(string newValue, string columnName, Recipe context)
+        {
+            DataManager.UpdateCellValue(newValue, columnName, context);
         }
     }
 }

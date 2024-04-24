@@ -32,5 +32,12 @@ namespace MyCoffeeNote.Domain.Contracts
 
         public delegate void ColumnsUpdate(ObservableCollection<string> newColumnList);
         public event ColumnsUpdate Notify;
+        /// <summary>
+        /// Обновление значения в ячейке
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <param name="columnName"></param>
+        /// <param name="context"></param>
+        void UpdateCellValue(string newValue, string columnName, Recipe context);
     }
 }
