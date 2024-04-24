@@ -1,4 +1,7 @@
-﻿namespace MyCoffeeNote.Domain.Entities
+﻿using System.Runtime.Serialization.Formatters.Binary;
+using System.Runtime.Serialization;
+
+namespace MyCoffeeNote.Domain.Entities
 {
     /// <summary>
     /// Единица рецепта
@@ -9,14 +12,12 @@
         /// Id
         /// </summary>
         public Guid Id { get; set; }
-        /// <summary>
-        /// Описание
-        /// </summary>
-        public string? Description { get; set; }
+
         /// <summary>
         /// Дата создания
         /// </summary>
         public DateTime CreationDate { get; set; }
+
         /// <summary>
         /// Список столбцов с названиями
         /// </summary>

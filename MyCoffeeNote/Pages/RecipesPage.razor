@@ -8,8 +8,8 @@
              Dense="true" Striped="true" Bordered="true" ReadOnly="false"
              EditMode="DataGridEditMode.Cell"
              EditTrigger="DataGridEditTrigger.OnRowClick"
-             CommittedItemChanges="@CommittedItemChanges"
-             SortMode="SortMode.Single">
+             SortMode="SortMode.None"
+             ColumnResizeMode="ResizeMode.Column">
     <ToolBarContent>
         <MudSpacer />
         <MudItem Style="margin-right: 1%;">
@@ -20,16 +20,14 @@
         </MudItem>
     </ToolBarContent>
     <Columns>
-        <PropertyColumn Property="x => x.Description"></PropertyColumn>
         @foreach (string column in AllUniqColumns.OrderBy(s => s))
         {
             <TemplateColumn Title="@column" T="Recipe" IsEditable="false">
                 <CellTemplate>
-                    <MudStack Row>
                         <MudTextField T="string" Variant="Variant.Text" 
                                       Value="@(GetCellValue(context.Item, column))"
-                                      ValueChanged="@(newValue => CellValueChanged(newValue, column, context.Item))"></MudTextField>
-                    </MudStack>
+                                      ValueChanged="@(newValue => CellValueChanged(newValue, column, context.Item))"
+                                  MaxLines="4" AutoGrow="true" Style="font-size: 0.7rem;"></MudTextField>
                 </CellTemplate>
             </TemplateColumn> 
         }

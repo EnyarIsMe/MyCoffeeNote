@@ -188,10 +188,6 @@ namespace MyCoffeeNote.Application.Managers
             {
                 allRecipes.Add(newRecipe);
             }
-            else
-            {
-                foundRecipe.Description = newRecipe.Description;
-            }
 
             try
             {
