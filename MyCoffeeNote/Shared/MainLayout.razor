@@ -1,20 +1,16 @@
-﻿@using Blazored.LocalStorage
+﻿@using MyCoffeeNote.Domain.Contracts
 @inherits LayoutComponentBase
-@inject ISyncLocalStorageService LocalStorage;
+@inject IDataManager dataManager;
 
 @code {
-    private bool IsDarkMode
-    {
-        get => LocalStorage.GetItem<bool>("isDarkMode");
-        set => LocalStorage.SetItem("isDarkMode", value);
-    }
+    
 }
 
-<MudThemeProvider IsDarkMode="IsDarkMode"></MudThemeProvider>
+<MudThemeProvider IsDarkMode="dataManager.IsDarkMode"></MudThemeProvider>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
 <MudLayout>
     @Body
-    <MudSwitch @bind-Value="@IsDarkMode" Color="Color.Primary" Class="ma-4" Style="align-self:flex-end;" T="bool" Label="Toggle Light/Dark Mode" />
+    <MudSwitch @bind-Value="@dataManager.IsDarkMode" Color="Color.Primary" Class="ma-4" Style="align-self:flex-end;" T="bool" Label="Toggle Light/Dark Mode" />
 </MudLayout>

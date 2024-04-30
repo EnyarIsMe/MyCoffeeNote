@@ -29,7 +29,18 @@ namespace MyCoffeeNote.Pages
         /// Таблица с рецептами
         /// </summary>
         private MudDataGrid<Recipe> MudDataGrid { get; set; }
+        
+        private bool AddColumn { get; set; }
+        private bool DeleteColumn { get; set; }
 
+        private string GetAddImage()
+        {
+            return DataManager.IsDarkMode ? "images/adddark.png" : "images/addbright.png";
+        }
+        private string GetDeleteImage()
+        {
+            return DataManager.IsDarkMode ? "images/deletedark.png" : "images/deletebright.png";
+        }
 
         /// <summary>
         /// Получить все рецепты

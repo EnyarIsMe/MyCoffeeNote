@@ -1,7 +1,6 @@
 ﻿@page "/"
 @using MyCoffeeNote.Domain.Entities
 
-
 <PageTitle>Ваши рецепты</PageTitle>
 
 <MudDataGrid Items="@AllRecipes" T="Recipe" @ref="MudDataGrid"
@@ -11,8 +10,27 @@
              SortMode="SortMode.None"
              ColumnResizeMode="ResizeMode.Column">
     <ToolBarContent>
-        <MudSpacer />
-        <MudItem Style="margin-right: 1%;">
+        <MudItem>
+            <MudButton @onmouseover="() => AddColumn = true" @onmouseleave="() => AddColumn = false">
+                Добавить новый столбец
+                <MudPopover OverflowBehavior="OverflowBehavior.FlipNever" Open="AddColumn" AnchorOrigin="@Origin.CenterCenter" TransformOrigin="@Origin.TopLeft">
+                    <MudImage Src="@(GetAddImage())"></MudImage>
+                    <MudText >Для добавления нового столбца, достаточно ввести его имя в этой ячейке и нажать Enter.</MudText>
+                    <MudText>После необходимо обновить страницу, чтобы столбы были автоматически отсортированы в алфавитном порядке</MudText>
+                </MudPopover>
+            </MudButton>
+        </MudItem>
+        <MudItem>
+            <MudButton @onmouseover="() => DeleteColumn = true" @onmouseleave="() => DeleteColumn = false">
+                Удалить столбец
+                <MudPopover OverflowBehavior="OverflowBehavior.FlipNever" Open="DeleteColumn" AnchorOrigin="@Origin.CenterCenter" TransformOrigin="@Origin.TopLeft">
+                    <MudImage Src="@(GetDeleteImage())"></MudImage>
+                    <MudText >Для удаления столбца, достаточно удалить все значения из него и он автоматически удалится</MudText>
+                </MudPopover>
+            </MudButton>
+        </MudItem>
+        <MudSpacer/>
+        <MudItem>
             <MudButton OnClick="@AddNewLine" Variant="Variant.Outlined"
                        EndIcon="@Icons.Material.Outlined.AddCircleOutline">
                 Добавить новый рецепт
@@ -39,7 +57,7 @@
                 </MudStack>
             </CellTemplate>
         </TemplateColumn>
-        <PropertyColumn Property="x => x.CreationDate.ToLongTimeString()" IsEditable="false" ></PropertyColumn>
+        <PropertyColumn Title="Дата добавления" Property="@(x => x.CreationDate.ToString("dd.MM.yy hh:mm"))" IsEditable="false"></PropertyColumn>
         <TemplateColumn IsEditable="false" >
             <CellTemplate>
                 <MudButton OnClick="@(() => DeleteLine(context))" Variant="Variant.Outlined"
