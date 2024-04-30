@@ -221,5 +221,11 @@ namespace MyCoffeeNote.Application.Managers
         }
 
         #endregion Действия с рецептами
+
+        public bool IsDarkMode
+        {
+            get => storageService.GetItem<bool>("isDarkMode");
+            set => storageService.SetItem("isDarkMode", value);
+        } 
     }
 }

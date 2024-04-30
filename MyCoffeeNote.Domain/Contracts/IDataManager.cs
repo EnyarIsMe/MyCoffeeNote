@@ -36,5 +36,9 @@ namespace MyCoffeeNote.Domain.Contracts
         /// Обновление значения в ячейке
         /// </summary>
         void UpdateCellValue(string newValue, string columnName, Recipe context);
+        /// <summary>
+        /// Статус дарк мода
+        /// </summary>
+        bool IsDarkMode { get; set; }
     }
 }
